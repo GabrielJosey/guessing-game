@@ -52,4 +52,4 @@ print("Guess a number between 1 and \(upperValue!)")
 print("Stink... so close. The number was actually \(random).")
 
 
-
+// want to add a while loop to be able to repeat the game when desired
