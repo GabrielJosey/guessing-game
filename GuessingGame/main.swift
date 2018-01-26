@@ -13,27 +13,25 @@ var guessCount = 0
 var guessesLeft = 5
 let tries = 5
 
+// User Enters Name
+print("Please enter your name.")
+var userName = readLine()!
 
 // Never did anything with "repeat". Might not work with it in the code now but if removed it would. Would also have to get rid of the variable "playAgain"
 func game() {
-   
-    
-    // User Enters Name
-    print("Please enter your name.")
-    var userName = readLine()!
     
     //User is Welcomed and sets how high they would like to guess
     print("Welcome to the guessing game, \(userName). You have \(guessesLeft) guesses left.")
     print("Between 1 and what number would you like to guess?")
-    var upperValue = Int(readLine()!)
+    let upperValue = Int(readLine()!)
     
     // random number is generated
-    var random = Int(arc4random_uniform(UInt32(Int(upperValue!)) + 1))
+    let random = Int(arc4random_uniform(UInt32(Int(upperValue!)) + 1))
     
     // User can now enter their guesses
     print("Guess a number between 1 and \(upperValue!)")
     
-    while guessCount <= tries {
+    while guessCount < tries {
         let guess = Int(readLine()!)
         
 //        if let guess = readLine() {
@@ -62,17 +60,17 @@ func game() {
         if guess == nil {
             //prevents user from entering an invalid answer
             print("Please make sure your guess is an integer.")
-        } else if guess! > random {
-            print("Too high. Try again. You have \(guessesLeft) guesses left.")
+        } else if guess! > random && guessesLeft != 0  {
             guessCount += 1
             guessesLeft -= 1
-        } else if guess! < random {
-            print("Too low. Bump it up. You have \(guessesLeft) guesses left.")
+            print("Your guess was too high. You have \(guessesLeft) guesses left.")
+        } else if guess! < random && guessesLeft != 0 {
             guessCount += 1
             guessesLeft -= 1
+            print("Your guess was too low. You have \(guessesLeft) guesses left.")
         } else if guess! == random {
             print("Wow, \(userName)! Your a mind reader! The number was \(random)!")
-        } else {
+        } else if guessesLeft == 0 {
             print("Stink... so close. The number was actually \(random).")
         }
     
@@ -83,7 +81,7 @@ game()
 
 while playAgain == true {
     print("Would you like to play again? Type 'y' for yes and 'n' for no.")
-    var toPlayOrNotToPlay = readLine()!
+    let toPlayOrNotToPlay = readLine()!
     if toPlayOrNotToPlay == "y" {
         guessCount = 0
         guessesLeft = 5
@@ -94,8 +92,5 @@ while playAgain == true {
     }
     
 }
-
-
-
 
 // want to add a while loop to be able to repeat the game when user so decides
